@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cac37143-fee8-413b-b123-63b95f28091d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/groovy/com/challenge/StringReplacer.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/com/challenge/StringReplacer.groovy" afterDir="false" />
     </list>
@@ -56,7 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1712135776552</updated>
       <workItem from="1712135777215" duration="2674000" />
-      <workItem from="1712303733619" duration="3074000" />
+      <workItem from="1712303733619" duration="7688000" />
     </task>
     <servers />
   </component>
