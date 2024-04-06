@@ -1,7 +1,5 @@
 package com.challenge
 
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.regex.Pattern
 import groovy.io.FileType
 
@@ -77,6 +75,7 @@ class StringReplacer {
             Pattern pattern = ~origText
             def fileContent = f.text
 
+            // logging modified files
             if (fileContent.contains(origText) && logFile != null) {
                 logFile.append(new Date().toString() + ' - ' + f.absolutePath + '\n')
             }
