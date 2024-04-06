@@ -9,29 +9,17 @@ class StringReplacer {
         // reading user's inputs
         // https://stackoverflow.com/questions/10184091/groovy-console-read-input
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in))
-
-        print "Enter directory: "
-        String dirInput = br.readLine()
-        def files = getFiles(dirInput)
-
-        while (files == null || files.length == 0) {
-            if (files == null) {
-                print "Not a valid directory. Please try again: "
-            } else if (files.length == 0) {
-                print "This directory is empty. Please enter a different one: "
-            }
-            dirInput = br.readLine()
-            files = getFiles(dirInput)
+        def fileDir = args[0]
+        def origText = args[1]
+        def newText = args[2]
+        def logDir = null
+        if (args.length > 3) {
+            logDir = args[3]
         }
 
-        print "Enter searched text or pattern: "
-        String textInput = br.readLine()
+        def files = getFiles(fileDir)
 
-        print "Enter replacement text: "
-        String replacementInput = br.readLine()
-
-        replace(files, textInput, replacementInput)
+        replace(files, origText, newText, logDir)
     }
 
 
@@ -46,18 +34,18 @@ class StringReplacer {
             return null
         }
         dir.eachFileRecurse(FileType.FILES) { file ->
-            println file
+            println file // TODO: remove once done
             list << file
         }
         return list
     }
 
-    static def replace(File[] files, String originalText, String newText) {
+    static replace(File[] files, String origText, String newText, String logDir) {
         // iterating through each file and replacing given text/pattern
         // https://www.tutorialspoint.com/groovy/groovy_file_io.htm
 
         for (File f in files) {
-            Pattern pattern = ~originalText
+            Pattern pattern = ~origText
             def fileContent = f.text
             fileContent = fileContent.replaceAll(pattern, newText)
             f.withWriter { writer -> writer.writeLine(fileContent) }
