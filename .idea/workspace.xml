@@ -55,22 +55,12 @@
       <option name="presentableId" value="Default" />
       <updated>1712135776552</updated>
       <workItem from="1712135777215" duration="2674000" />
-      <workItem from="1712303733619" duration="12027000" />
+      <workItem from="1712303733619" duration="13601000" />
+      <workItem from="1712390263097" duration="1441000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/groovy/com/challenge/StringReplacer.groovy</url>
-          <line>43</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -15,6 +15,16 @@ class StringReplacer {
         String dirInput = br.readLine()
         def files = getFiles(dirInput)
 
+        while (files == null || files.length == 0) {
+            if (files == null) {
+                print "Not a valid directory. Please try again: "
+            } else if (files.length == 0) {
+                print "This directory is empty. Please enter a different one: "
+            }
+            dirInput = br.readLine()
+            files = getFiles(dirInput)
+        }
+
         print "Enter searched text or pattern: "
         String textInput = br.readLine()
 
@@ -26,13 +36,15 @@ class StringReplacer {
 
 
     static File[] getFiles(String path) {
-        // getting a list of files in given directory and subdirectories
+        // getting a list of files in given directory and subdirectories via recursive method
         // https://stackoverflow.com/questions/3953965/get-a-list-of-all-the-files-in-a-directory-recursive
 
-        //TODO: check if given string is a directory
         def list = []
 
         def dir = new File(path)
+        if (!dir.isDirectory()) {
+            return null
+        }
         dir.eachFileRecurse(FileType.FILES) { file ->
             println file
             list << file
@@ -50,6 +62,5 @@ class StringReplacer {
             fileContent = fileContent.replaceAll(pattern, newText)
             f.withWriter { writer -> writer.writeLine(fileContent) }
         }
-
     }
 }
