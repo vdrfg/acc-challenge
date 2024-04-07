@@ -11,7 +11,7 @@ class StringReplacer {
         def fileDir = args[0]
         def origText = args[1]
         def newText = args[2]
-        def optLogFile = createLogFile()
+        def optLogFile = createLogFile(args)
 
         // getting all files from given directory
         def files = getFiles(fileDir)
@@ -69,16 +69,19 @@ class StringReplacer {
 
             // logging modified files
             if (fileContent.contains(origText) && logFile != null) {
-                logFile.append(new Date().toString() + ' - ' + f.absolutePath + '\n')
+                logFile.append(String.format("%s - %s\n", new Date().toString(), f.absolutePath))
+                fileContent = fileContent.replaceAll(pattern, newText)
+                f.withWriter { writer -> writer.writeLine(fileContent) }
             }
-
-            fileContent = fileContent.replaceAll(pattern, newText)
-            f.withWriter { writer -> writer.writeLine(fileContent) }
         }
     }
 
     // returning null if optional argument wasn't passed
     static def createLogFile(String[] args) {
         args.length > 3 ? new File(args[3]) : null
+    }
+
+    static def getFileDirectory(File file) {
+        file.absolutePath.substring(0, file.absolutePath.lastIndexOf("/"))
     }
 }
