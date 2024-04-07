@@ -47,13 +47,13 @@ class StringReplacer {
 
     static replace(File[] files, String origText, String newText, File logFile) {
 
-        // if optional argument passed, log file is created
+        // if optional argument passed, actual file is created in given directory
         if (logFile != null) {
 
             if (!logFile.exists()) {
 
                 // checking if log directory exists and creating one if it doesn't yet
-                def logDir = new File(logFile.absolutePath.substring(0, logFile.absolutePath.lastIndexOf("/")))
+                def logDir = new File(getFileDirectory(logFile))
                 if (!logDir.isDirectory()) {
                     logDir.mkdir()
                 }
@@ -67,9 +67,11 @@ class StringReplacer {
             Pattern pattern = ~origText
             def fileContent = f.text
 
-            // logging modified files
-            if (fileContent.contains(origText) && logFile != null) {
-                logFile.append(String.format("%s - %s\n", new Date().toString(), f.absolutePath))
+            if (fileContent.contains(origText)) {
+                if (logFile != null) {
+                    // logging modified files
+                    logFile.append(String.format("%s - %s\n", new Date().toString(), f.absolutePath))
+                }
                 fileContent = fileContent.replaceAll(pattern, newText)
                 f.withWriter { writer -> writer.writeLine(fileContent) }
             }
