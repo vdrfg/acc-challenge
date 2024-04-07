@@ -11,12 +11,7 @@ class StringReplacer {
         def fileDir = args[0]
         def origText = args[1]
         def newText = args[2]
-
-        // log directory optional, hence null by default
-        def logPath = null
-        if (args.length > 3) {
-            logPath = args[3]
-        }
+        def optLogFile = createLogFile()
 
         def files = getFiles(fileDir)
 
@@ -26,7 +21,7 @@ class StringReplacer {
         } else if (files.length == 0) {
             print "Directory is empty. No files to modify."
         } else {
-            replace(files, origText, newText, logPath)
+            replace(files, origText, newText, optLogFile)
         }
     }
 
@@ -48,19 +43,15 @@ class StringReplacer {
         return list
     }
 
-    static replace(File[] files, String origText, String newText, String logPath) {
-
-        def logFile = null
+    static replace(File[] files, String origText, String newText, File logFile) {
 
         // if optional argument passed, log file is created
-        if (logPath != null) {
-
-            logFile = new File(logPath)
+        if (logFile != null) {
 
             if (!logFile.exists()) {
 
                 // checking if log directory exists and creating one if it doesn't yet
-                def logDir = new File(logPath.substring(0, logPath.lastIndexOf("/")))
+                def logDir = new File(logFile.absolutePath.substring(0, logFile.absolutePath.lastIndexOf("/")))
                 if (!logDir.isDirectory()) {
                     logDir.mkdir()
                 }
@@ -70,7 +61,6 @@ class StringReplacer {
         }
 
         // iterating through each file and replacing given text/pattern
-        // https://www.tutorialspoint.com/groovy/groovy_file_io.htm
         for (File f in files) {
             Pattern pattern = ~origText
             def fileContent = f.text
@@ -83,5 +73,10 @@ class StringReplacer {
             fileContent = fileContent.replaceAll(pattern, newText)
             f.withWriter { writer -> writer.writeLine(fileContent) }
         }
+    }
+
+    // log directory optional, null by default
+    static def createLogFile(String[] args) {
+        args.length > 3 ? new File(args[3]) : null
     }
 }
