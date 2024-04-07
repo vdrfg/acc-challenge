@@ -7,12 +7,13 @@ import groovy.io.FileType
 class StringReplacer {
     static void main(String[] args) {
 
-        // reading input arguments
+        // assigning input arguments
         def fileDir = args[0]
         def origText = args[1]
         def newText = args[2]
         def optLogFile = createLogFile()
 
+        // getting all files from given directory
         def files = getFiles(fileDir)
 
         // checking if given directory is valid and/or if there are any files
@@ -33,6 +34,7 @@ class StringReplacer {
 
         def dir = new File(path)
         if (!dir.isDirectory()) {
+            // returning null in case path is not valid
             return null
         }
 
@@ -75,7 +77,7 @@ class StringReplacer {
         }
     }
 
-    // log directory optional, null by default
+    // returning null if optional argument wasn't passed
     static def createLogFile(String[] args) {
         args.length > 3 ? new File(args[3]) : null
     }
