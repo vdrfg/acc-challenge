@@ -55,7 +55,7 @@ class StringReplacer {
             Pattern pattern = ~origText
             def fileContent = f.text
 
-            if (fileContent.contains(origText)) {
+            if (fileContent =~ pattern) {
                 // creating a backup of original
                 createBackup(f)
 
@@ -94,8 +94,13 @@ class StringReplacer {
     // creating backup folder and file in the same directory as the original file
     static createBackup(File file) {
         def backupDir = new File(file.parentFile.absolutePath + "/backups")
-        def copy = new File(String.format("%s/%s%s", backupDir, file.name.lastIndexOf('.').with {it != -1 ? file.name[0..<it] : file.name}
-                , "-backup.txt"))
+        def copy = new File(
+                String.format(
+                        "%s/%s%s",
+                        backupDir,
+                        file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it] : file.name },
+                        "-backup.txt")
+        )
 
         if (!backupDir.exists()) {
             backupDir.mkdirs()
@@ -106,3 +111,4 @@ class StringReplacer {
         copy.createNewFile()
     }
 }
+

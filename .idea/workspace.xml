@@ -50,7 +50,7 @@
     <configuration name="StringReplacer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.challenge.StringReplacer" />
       <module name="acc-challenge.main" />
-      <option name="PROGRAM_PARAMETERS" value="docs programming cooking docs/archive/test.txt" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;docs&quot; &quot;\b[A-Za-z0-9]{10,}\b&quot; &quot;TEST&quot; &quot;docs/archive/test.txt&quot;   " />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.challenge.*" />
@@ -73,7 +73,7 @@
       <workItem from="1712135777215" duration="2674000" />
       <workItem from="1712303733619" duration="13601000" />
       <workItem from="1712390263097" duration="10101000" />
-      <workItem from="1712476575252" duration="10865000" />
+      <workItem from="1712476575252" duration="15033000" />
     </task>
     <servers />
   </component>
@@ -86,7 +86,17 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/groovy/com/challenge/StringReplacer.groovy</url>
           <line>10</line>
-          <option name="timeStamp" value="4" />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/groovy/com/challenge/StringReplacer.groovy</url>
+          <line>53</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/groovy/com/challenge/StringReplacer.groovy</url>
+          <line>55</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
