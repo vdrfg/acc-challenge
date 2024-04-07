@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cac37143-fee8-413b-b123-63b95f28091d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/groovy/com/challenge/StringReplacer.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/groovy/com/challenge/StringReplacer.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +50,7 @@
     <configuration name="StringReplacer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.challenge.StringReplacer" />
       <module name="acc-challenge.main" />
-      <option name="PROGRAM_PARAMETERS" value="docs cooking programming docs/archive/test.txt" />
+      <option name="PROGRAM_PARAMETERS" value="docs programming cooking docs/archive/test.txt" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.challenge.*" />
@@ -72,11 +73,22 @@
       <workItem from="1712135777215" duration="2674000" />
       <workItem from="1712303733619" duration="13601000" />
       <workItem from="1712390263097" duration="10101000" />
-      <workItem from="1712476575252" duration="4084000" />
+      <workItem from="1712476575252" duration="10865000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/groovy/com/challenge/StringReplacer.groovy</url>
+          <line>10</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

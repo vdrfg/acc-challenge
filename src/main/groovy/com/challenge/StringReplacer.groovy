@@ -39,7 +39,10 @@ class StringReplacer {
         }
 
         dir.eachFileRecurse(FileType.FILES) { file ->
-            list << file
+            // filtering out backup files
+            if (!file.name.contains("backup")) {
+                list << file
+            }
         }
 
         return list
@@ -47,33 +50,37 @@ class StringReplacer {
 
     static replace(File[] files, String origText, String newText, File logFile) {
 
-        // if optional argument passed, actual file is created in given directory
-        if (logFile != null) {
-
-            if (!logFile.exists()) {
-
-                // checking if log directory exists and creating one if it doesn't yet
-                def logDir = new File(getFileDirectory(logFile))
-                if (!logDir.isDirectory()) {
-                    logDir.mkdir()
-                }
-
-                logFile.createNewFile()
-            }
-        }
-
         // iterating through each file and replacing given text/pattern
         for (File f in files) {
             Pattern pattern = ~origText
             def fileContent = f.text
 
             if (fileContent.contains(origText)) {
-                if (logFile != null) {
-                    // logging modified files
-                    logFile.append(String.format("%s - %s\n", new Date().toString(), f.absolutePath))
-                }
+                // creating a backup of original
+                createBackup(f)
+
+                // modifying original file with new strings/patterns
                 fileContent = fileContent.replaceAll(pattern, newText)
                 f.withWriter { writer -> writer.writeLine(fileContent) }
+
+                // log file is created in given directory if log path received and if the file is modified
+                if (logFile != null) {
+
+                    if (!logFile.exists()) {
+
+                        // checking if log directory exists and creating one if it doesn't yet
+                        def logDir = new File(logFile.parentFile.absolutePath)
+                        if (!logDir.exists()) {
+                            logDir.mkdirs()
+                        }
+
+                        logFile.createNewFile()
+                    }
+
+                    // logging modified files
+                    logFile.append(String.format("%s - %s\n", new Date().toString(), f.absolutePath))
+
+                }
             }
         }
     }
@@ -83,7 +90,19 @@ class StringReplacer {
         args.length > 3 ? new File(args[3]) : null
     }
 
-    static def getFileDirectory(File file) {
-        file.absolutePath.substring(0, file.absolutePath.lastIndexOf("/"))
+
+    // creating backup folder and file in the same directory as the original file
+    static createBackup(File file) {
+        def backupDir = new File(file.parentFile.absolutePath + "/backups")
+        def copy = new File(String.format("%s/%s%s", backupDir, file.name.lastIndexOf('.').with {it != -1 ? file.name[0..<it] : file.name}
+                , "-backup.txt"))
+
+        if (!backupDir.exists()) {
+            backupDir.mkdirs()
+        }
+
+        copy << file.text
+
+        copy.createNewFile()
     }
 }
